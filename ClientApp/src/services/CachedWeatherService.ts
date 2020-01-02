@@ -1,5 +1,7 @@
 import { IWeatherService } from './IWeatherService';
+import { injectable } from 'inversify';
 
+@injectable()
 export class CachedWeatherService implements IWeatherService {
     getWeather(): Promise<Response> {
         let expiration = 10;
