@@ -1,3 +1,7 @@
+import { WeatherForecast } from '../store/WeatherForecasts';
 export interface IWeatherService {
-    getWeather(): Promise<Response>;
+    forecasts: WeatherForecast[];
+    getWeather(startDateIndex: number): Promise<Response>;
+    isLoading: boolean;
+    startDateIndex: number;
 }

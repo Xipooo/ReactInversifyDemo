@@ -1,9 +1,15 @@
 import { IWeatherService } from './IWeatherService';
 import { injectable } from 'inversify';
+import { WeatherForecast } from '../store/WeatherForecasts';
 
 @injectable()
 export class CachedWeatherService implements IWeatherService {
-    getWeather(): Promise<Response> {
+    isLoading: boolean = false;
+    startDateIndex: number = 0;
+    forecasts: WeatherForecast[] = new Array<WeatherForecast>();
+    getWeather(startDateIndex: number): Promise<Response> {
+        this.isLoading = true;
+        this.startDateIndex = startDateIndex;
         let expiration = 10;
         let cachedData: any = localStorage.getItem('weatherService');
         let cachedTime: string | null = localStorage.getItem('weatherServiceCachedAt') ;
@@ -21,9 +27,14 @@ export class CachedWeatherService implements IWeatherService {
                 content => {
                     localStorage.setItem('weatherService', content);
                     localStorage.setItem('weatherServiceCachedAt', Date.now().toString());
+                    
                 }
             );
-            
+            resp.clone().json().then(
+                content => {
+                    this.forecasts = content as WeatherForecast[];
+                }
+            ).then(() => this.isLoading = false);
             return resp;
         });
     }
