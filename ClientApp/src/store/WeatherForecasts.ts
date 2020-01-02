@@ -1,8 +1,7 @@
 import { Action, Reducer } from 'redux';
 import { AppThunkAction } from './';
 import { IWeatherService } from '../services/IWeatherService';
-import { CachedWeatherService } from '../services/CachedWeatherService';
-import { container, lazyInject } from '../services/inversify.config';
+import { container } from '../services/inversify.config';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
