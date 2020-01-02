@@ -1,7 +1,7 @@
 import { Action, Reducer } from 'redux';
 import { AppThunkAction } from './';
 import { IWeatherService } from '../services/IWeatherService';
-import { container } from '../services/inversify.config';
+import { container, TYPES } from '../services/inversify.config';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
@@ -45,7 +45,7 @@ type KnownAction = RequestWeatherForecastsAction | ReceiveWeatherForecastsAction
 export const actionCreators = {
     
     requestWeatherForecasts: (startDateIndex: number): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        let weatherService: IWeatherService = container.get<IWeatherService>("IWeatherService");
+        let weatherService: IWeatherService = container.get(TYPES.IWeatherService);
         // Only load data if it's something we don't already have (and are not already loading)
         const appState = getState();
         if (appState && appState.weatherForecasts && startDateIndex !== appState.weatherForecasts.startDateIndex) {
