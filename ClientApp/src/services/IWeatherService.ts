@@ -1,7 +1,5 @@
-import { WeatherForecast } from '../store/WeatherForecasts';
-export interface IWeatherService {
-    forecasts: WeatherForecast[];
+import { WeatherForecastsState } from '../store/WeatherForecasts';
+
+export interface IWeatherService extends WeatherForecastsState {
     getWeather(startDateIndex: number): Promise<Response>;
-    isLoading: boolean;
-    startDateIndex: number;
 }
