@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { Container } from 'inversify';
 import { CachedWeatherService } from './CachedWeatherService';
-import getDecorators from "inversify-inject-decorators";
+import { CounterService } from "./CounterService";
 
 const TYPES = {
     IWeatherService: Symbol.for("IWeatherService")
@@ -9,6 +9,5 @@ const TYPES = {
 
 let container = new Container();
 container.bind(TYPES.IWeatherService).to(CachedWeatherService);
-let { lazyInject } = getDecorators(container);
-
-export { container, TYPES, lazyInject };
+container.bind(CounterService).toSelf();
+export { container, TYPES };
