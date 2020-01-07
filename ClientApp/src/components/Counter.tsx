@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { CounterService } from '../services/CounterService';
-import { resolve } from 'inversify-react';
-import { DIContext } from '../services/InversifyProvider';
+import { container } from '../services/inversify.config';
 
 const Counter: React.FunctionComponent = () => {
-    const { container } = React.useContext(DIContext);
     let _counterService = (container ? container.get(CounterService) : undefined);
     const [count, setCount] = useState(0);
 
