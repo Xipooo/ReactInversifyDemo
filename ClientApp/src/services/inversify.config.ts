@@ -9,5 +9,5 @@ const TYPES = {
 
 let container = new Container();
 container.bind(TYPES.IWeatherService).to(CachedWeatherService);
-container.bind(CounterService).toSelf();
+container.bind(CounterService).toSelf().inSingletonScope();
 export { container, TYPES };
