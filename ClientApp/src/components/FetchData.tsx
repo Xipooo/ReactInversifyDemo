@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Forecast from './Forecast';
-import * as WeatherForecastsStore from '../store/WeatherForecasts';
 import { IWeatherService } from '../services/IWeatherService';
 import { TYPES } from '../services/inversify.config';
 import { resolve } from 'inversify-react';
